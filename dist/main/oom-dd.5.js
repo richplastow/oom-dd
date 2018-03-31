@@ -1,11 +1,11 @@
-//// Oom.Dd //// 1.0.4 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.5 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 "use strict";
 !function(ROOT) {
   'use strict';
   var META = {
     NAME: 'Oom.Dd',
-    VERSION: '1.0.4',
+    VERSION: '1.0.5',
     HOMEPAGE: 'http://oom-dd.richplastow.com/',
     REMARKS: 'The Developing Dreams VR Website',
     LOADED_FIRST: !ROOT.Oom

@@ -25,7 +25,7 @@ $oomClasses['Oom.Dd'] = new class {
     },
     "VERSION": {
       "name": "VERSION",
-      "default": "1.0.4",
+      "default": "1.0.5",
       "isFn": false,
       "type": "@TODO",
       "typeStr": "String",
@@ -132,7 +132,7 @@ $oomClasses['Oom.Dd.Cloud'] = new class {
     },
     "VERSION": {
       "name": "VERSION",
-      "default": "1.0.4",
+      "default": "1.0.5",
       "isFn": false,
       "type": "@TODO",
       "typeStr": "String",
