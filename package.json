@@ -1,6 +1,6 @@
 {
   "name": "oom-dd",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "The Developing Dreams VR Website",
   "main": "dist/main/oom-dd.min.5.js",
   "directories": {

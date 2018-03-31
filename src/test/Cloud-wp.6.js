@@ -1,4 +1,4 @@
-//// Oom.Dd //// 1.0.4 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.5 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 !function (ROOT) { 'use strict'
 if (false) return // change to `true` to ‘hard skip’ this test

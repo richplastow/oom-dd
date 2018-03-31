@@ -10,7 +10,7 @@ Author: Rich Plastow for Developing Dreams
 Author URI: https://richplastow.com/
 License: MIT
 Text Domain: oom-dd
-Version: 1.0.4
+Version: 1.0.5
 */
 
 
