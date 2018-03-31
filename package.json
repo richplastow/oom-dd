@@ -1,0 +1,38 @@
+{
+  "name": "oom-dd",
+  "version": "1.0.0",
+  "description": "A VR website for Developing Dreams",
+  "main": "dist/main/oom-dd.min.5.js",
+  "directories": {
+    "example": "support"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "test": "node oomtility/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loopdotcoop/oom-dd.git"
+  },
+  "keywords": [
+    "Oom",
+    "🔅",
+    "Interactive",
+    "🌟",
+    "3d",
+    "🍍",
+    "Website",
+    "✨"
+  ],
+  "author": "Rich Plastow <rich@richplastow.com> (https://richplastow.com/)",
+  "contributors": [
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loopdotcoop/oom-dd/issues"
+  },
+  "homepage": "http://oom-dd.richplastow.com/"
+}
