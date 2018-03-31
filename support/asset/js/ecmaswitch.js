@@ -22,7 +22,7 @@ var d = ROOT.document || {
 //// This dynamic section is kept up to date by ‘oomtility/make.js’ ////////////
 
 var projectLC = 'oom-dd'
-var classFiles = 'Bases'
+var classFiles = 'Bases,Cloud'
 
 //// END DYNAMIC SECTION ///////////////////////////////////////////////////////
 

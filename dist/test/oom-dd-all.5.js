@@ -123,17 +123,6 @@
           throw e;
         }
       });
-      it('has read-only static `inst_tally`', function() {
-        try {
-          Class.reset();
-          eq(stat.inst_tally, 0, 'stat.inst_tally is zero after a ‘hard class reset’');
-          var instance = new Class();
-          eq(stat.inst_tally, 1, 'stat.inst_tally is 1 after an instantiation');
-        } catch (e) {
-          console.error(e.message);
-          throw e;
-        }
-      });
     });
     describe('An Oom instance', function() {
       var Class = ROOT.Oom,
@@ -259,21 +248,6 @@
           throw e;
         }
       });
-      it('has constant attribute `INST_INDEX`', function() {
-        try {
-          Class.reset();
-          var instance0 = new Class();
-          var instance1 = new Class();
-          eq(instance0.attr.INST_INDEX, 0, 'First instance after a ‘hard class reset’ has attr.INST_INDEX 0');
-          eq(instance1.attr.INST_INDEX, 1, 'Second instance after a ‘hard class reset’ has attr.INST_INDEX 1');
-          eq('string', $traceurRuntime.typeof(attr.UUID), '`attr.UUID` is a string');
-          is(/^[0-9A-Za-z]{6}$/.test(attr.UUID), '`attr.UUID` conforms to /^[0-9A-Za-z]{6}$/');
-          neq(instance0.attr.UUID, instance1.attr.UUID, 'Two instances have different UUIDs');
-        } catch (e) {
-          console.error(e.message);
-          throw e;
-        }
-      });
     });
   });
   describe('Oom.Dd (all)', function() {
@@ -372,17 +346,6 @@
             Class.reset();
             eq(stat[key], schema.stat[key].default, 'stat.' + key + ' has been reset to ' + schema.stat[key].default);
           }
-        } catch (e) {
-          console.error(e.message);
-          throw e;
-        }
-      });
-      it('has read-only static `inst_tally`', function() {
-        try {
-          Class.reset();
-          eq(stat.inst_tally, 0, 'stat.inst_tally is zero after a ‘hard class reset’');
-          var instance = new Class();
-          eq(stat.inst_tally, 1, 'stat.inst_tally is 1 after an instantiation');
         } catch (e) {
           console.error(e.message);
           throw e;
@@ -513,21 +476,6 @@
           throw e;
         }
       });
-      it('has constant attribute `INST_INDEX`', function() {
-        try {
-          Class.reset();
-          var instance0 = new Class();
-          var instance1 = new Class();
-          eq(instance0.attr.INST_INDEX, 0, 'First instance after a ‘hard class reset’ has attr.INST_INDEX 0');
-          eq(instance1.attr.INST_INDEX, 1, 'Second instance after a ‘hard class reset’ has attr.INST_INDEX 1');
-          eq('string', $traceurRuntime.typeof(attr.UUID), '`attr.UUID` is a string');
-          is(/^[0-9A-Za-z]{6}$/.test(attr.UUID), '`attr.UUID` conforms to /^[0-9A-Za-z]{6}$/');
-          neq(instance0.attr.UUID, instance1.attr.UUID, 'Two instances have different UUIDs');
-        } catch (e) {
-          console.error(e.message);
-          throw e;
-        }
-      });
     });
   });
 }('object' === (typeof global === 'undefined' ? 'undefined' : $traceurRuntime.typeof(global)) ? global : this);
@@ -575,6 +523,255 @@ function testify() {
     }
   };
 }
+!function(ROOT) {
+  'use strict';
+  if (false)
+    return;
+  var $__2 = ROOT.testify(),
+      describe = $__2.describe,
+      it = $__2.it,
+      eq = $__2.eq,
+      neq = $__2.neq,
+      is = $__2.is,
+      trySoftSet = $__2.trySoftSet,
+      tryHardSet = $__2.tryHardSet,
+      goodVals = $__2.goodVals,
+      badVals = $__2.badVals;
+  var $__3 = Oom.KIT,
+      countKeyMatches = $__3.countKeyMatches,
+      isConstant = $__3.isConstant,
+      isReadOnly = $__3.isReadOnly,
+      isReadWrite = $__3.isReadWrite,
+      isValid = $__3.isValid;
+  describe('Oom.Dd.Cloud (all)', function() {
+    describe('The Oom.Dd.Cloud class', function() {
+      var Class = ROOT.Oom.Dd.Cloud,
+          schema = Class.schema,
+          stat = Class.stat;
+      it('is a class with base methods', function() {
+        try {
+          eq((typeof Class === 'undefined' ? 'undefined' : $traceurRuntime.typeof(Class)), 'function', '`typeof Oom.Dd.Cloud` is a function');
+          eq($traceurRuntime.typeof(Class.reset), 'function', 'Oom.Dd.Cloud.reset() is a static method');
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+      var n = countKeyMatches(schema.stat, isConstant);
+      it(("has " + n + " constant static" + (1 == n ? '' : 's')), function() {
+        try {
+          tryHardSet(Class, 'name', 'Changed!');
+          eq(Class.name, 'Oom.Dd.Cloud', 'name is Oom.Dd.Cloud');
+          for (var key in schema.stat) {
+            if (!isConstant(key))
+              continue;
+            var def = schema.stat[key];
+            tryHardSet(stat, key, goodVals[def.typeStr]);
+            eq(stat[key], def.default, 'stat.' + key + ' is ' + def.default.toString());
+            is(isValid(def, stat[key]), 'stat.' + key + ' is a valid ' + def.typeStr);
+          }
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+      n = countKeyMatches(schema.stat, isReadOnly);
+      it(("has " + n + " read-only static" + (1 == n ? '' : 's')), function() {
+        try {
+          Class.reset();
+          for (var key in schema.stat) {
+            if (!isReadOnly(key))
+              continue;
+            var def = schema.stat[key];
+            stat[key] = goodVals[def.typeStr];
+            eq(stat[key], def.default, 'stat.' + key + ' is initially ' + def.default.toString());
+            is(isValid(def, stat[key]), 'stat.' + key + ' is a valid ' + def.typeStr);
+          }
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+      it('sees when read-only statics change', function() {
+        try {
+          for (var key in schema.stat) {
+            if (!isReadOnly(key))
+              continue;
+            var def = schema.stat[key];
+            var good = goodVals[def.typeStr];
+            var shadowObj = def.perClass ? stat : def.definedIn.stat;
+            shadowObj['_' + key] = good;
+            eq(stat[key], good, 'stat.' + key + ' has changed to ' + good);
+            Class.reset();
+            eq(stat[key], def.default, 'stat.' + key + ' has been reset to ' + def.default);
+          }
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+      n = countKeyMatches(schema.stat, isReadWrite);
+      it(("has " + n + " read-write static" + (1 == n ? '' : 's')), function() {
+        try {
+          for (var key in schema.stat) {
+            if (!isReadWrite(key))
+              continue;
+            var def = schema.stat[key];
+            eq(stat[key], def.default, 'stat.' + key + ' is initially ' + def.default.toString());
+            is(isValid(def, stat[key]), 'stat.' + key + ' is a valid ' + def.typeStr);
+          }
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+      it('allows read-write statics to be changed', function() {
+        try {
+          for (var key in schema.stat) {
+            if (!isReadWrite(key))
+              continue;
+            var good = goodVals[schema.stat[key].typeStr];
+            var bad = badVals[schema.stat[key].typeStr];
+            stat[key] = good;
+            eq(stat[key], good, 'stat.' + key + ' has changed to ' + good);
+            stat[key] = bad;
+            eq(stat[key], good, 'stat.' + key + ' has NOT changed to ' + bad);
+            Class.reset();
+            eq(stat[key], schema.stat[key].default, 'stat.' + key + ' has been reset to ' + schema.stat[key].default);
+          }
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+    });
+    describe('An Oom.Dd.Cloud instance', function() {
+      var Class = ROOT.Oom.Dd.Cloud,
+          schema = Class.schema,
+          instance = new Class(),
+          attr = instance.attr,
+          unchanged = new Class();
+      it('is an instance with base methods', function() {
+        try {
+          is(instance instanceof Class, 'is an instance of Oom.Dd.Cloud');
+          eq(Class, instance.constructor, '`constructor` is Oom.Dd.Cloud');
+          eq($traceurRuntime.typeof(instance.reset), 'function', 'myOomDdCloud.reset() is an instance method');
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+      var n = countKeyMatches(schema.attr, function(key) {
+        return isConstant(key) && schema.attr[key].isFn;
+      });
+      it(("has " + n + " constant attribute" + (1 == n ? '' : 's') + " from function"), function() {
+        try {
+          for (var key in schema.attr) {
+            var def = schema.attr[key];
+            if (!isConstant(key) || !def.isFn)
+              continue;
+            var origValue = attr[key];
+            trySoftSet(attr, key, goodVals[def.typeStr]);
+            eq(attr[key], origValue, 'attr.' + key + ' remains ' + origValue.toString() + ' after simple set');
+          }
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+      n = countKeyMatches(schema.attr, function(key) {
+        return isConstant(key) && !schema.attr[key].isFn;
+      });
+      it(("has " + n + " constant attribute" + (1 == n ? '' : 's') + " NOT from function"), function() {
+        try {
+          for (var key in schema.attr) {
+            var def = schema.attr[key];
+            if (!isConstant(key) || def.isFn)
+              continue;
+            tryHardSet(attr, key, goodVals[def.typeStr]);
+            eq(attr[key], def.default, 'attr.' + key + ' is ' + def.default.toString());
+            is(isValid(def, attr[key]), 'attr.' + key + ' is a valid ' + def.typeStr);
+          }
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+      n = countKeyMatches(schema.attr, isReadOnly);
+      it(("has " + n + " read-only attribute" + (1 == n ? '' : 's')), function() {
+        try {
+          instance.reset();
+          for (var key in schema.attr) {
+            if (!isReadOnly(key))
+              continue;
+            var def = schema.attr[key];
+            attr[key] = goodVals[def.typeStr];
+            eq(attr[key], def.default, 'attr.' + key + ' is initially ' + def.default.toString());
+            is(isValid(def, attr[key]), 'attr.' + key + ' is a valid ' + def.typeStr);
+          }
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+      it('sees when read-only attributes change', function() {
+        try {
+          for (var key in schema.attr) {
+            if (!isReadOnly(key))
+              continue;
+            var good = goodVals[schema.attr[key].typeStr];
+            attr['_' + key] = good;
+            eq(attr[key], good, 'attr.' + key + ' has changed to ' + good);
+            neq(unchanged.attr[key], good, 'unchanged.attr.' + key + ' has NOT changed to ' + good);
+            instance.reset();
+            unchanged.reset();
+            eq(attr[key], schema.attr[key].default, 'attr.' + key + ' has been reset to ' + schema.attr[key].default);
+          }
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+      n = countKeyMatches(schema.attr, isReadWrite);
+      it(("has " + n + " read-write attribute" + (1 == n ? '' : 's')), function() {
+        try {
+          for (var key in schema.attr) {
+            if (!isReadWrite(key))
+              continue;
+            var def = schema.attr[key];
+            eq(attr[key], def.default, 'attr.' + key + ' is initially ' + def.default.toString());
+            is(isValid(def, attr[key]), 'attr.' + key + ' is a valid ' + def.typeStr);
+          }
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+      it('allows read-write attributes to be changed', function() {
+        try {
+          for (var key in schema.attr) {
+            if (!isReadWrite(key))
+              continue;
+            var good = goodVals[schema.attr[key].typeStr];
+            var bad = badVals[schema.attr[key].typeStr];
+            attr[key] = good;
+            eq(attr[key], good, 'attr.' + key + ' has changed to ' + good);
+            neq(unchanged.attr[key], good, 'unchanged.attr.' + key + ' has NOT changed to ' + good);
+            attr[key] = bad;
+            eq(attr[key], good, 'attr.' + key + ' has NOT changed to ' + bad);
+            neq(unchanged.attr[key], bad, 'unchanged.attr.' + key + ' has NOT changed to ' + bad);
+            instance.reset();
+            unchanged.reset();
+            eq(attr[key], schema.attr[key].default, 'attr.' + key + ' has been reset to ' + schema.attr[key].default);
+          }
+        } catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+    });
+  });
+}('object' === (typeof global === 'undefined' ? 'undefined' : $traceurRuntime.typeof(global)) ? global : this);
 
 
 

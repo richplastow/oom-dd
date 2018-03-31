@@ -158,7 +158,7 @@ if (META.LOADED_FIRST) {
 
         //// Public instance properties (known as ‘attributes’ in Oom).
         }, attr: {
-
+/*
             //// Public constant attributes.
             UUID: {
                 remarks: 'Every Oom instance gets a universally unique ID'
@@ -180,12 +180,11 @@ if (META.LOADED_FIRST) {
 
             //// Public read-write attributes.
             //// Paired with underying underscore-prefixed ‘shadow’ attributes.
-          , hilite: {
+          ,*/ hilite: {
                 remarks: 'General purpose, useful as a dev label or status'
               , default: '#445566'
               , type:    'color'
             }
-          , fooBar: { default:1000, type:Number }
 
         }
 

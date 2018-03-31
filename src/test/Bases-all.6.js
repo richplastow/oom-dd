@@ -144,6 +144,7 @@ describe('The Oom class', function () {
 
 
     //// Oom class: Custom read-only statics - initial values.
+/*
     it('has read-only static `inst_tally`', function(){try{
         Class.reset() // so that `stat._inst_tally = 0` @TODO hardReset()
         eq( stat.inst_tally, 0
@@ -152,7 +153,7 @@ describe('The Oom class', function () {
         eq( stat.inst_tally, 1
           , 'stat.inst_tally is 1 after an instantiation' )
     }catch(e){console.error(e.message);throw e}})
-
+*/
 
     //@TODO more custom static tests
 
@@ -302,6 +303,7 @@ describe('An Oom instance', function () {
 
 
     //// Oom instance: Custom constant attributes.
+/*
     it('has constant attribute `INST_INDEX`', function(){try{
         Class.reset() // so that `stat._inst_tally = 0` @TODO hardReset()
         const instance0 = new Class()
@@ -317,7 +319,7 @@ describe('An Oom instance', function () {
         neq( instance0.attr.UUID, instance1.attr.UUID
           , 'Two instances have different UUIDs' )
     }catch(e){console.error(e.message);throw e}})
-
+*/
 
 
 
@@ -461,6 +463,7 @@ describe('The Oom.Dd class', function () {
 
 
     //// Oom.Dd class: Custom read-only statics - initial values.
+/*
     it('has read-only static `inst_tally`', function(){try{
         Class.reset() // so that `stat._inst_tally = 0` @TODO hardReset()
         eq( stat.inst_tally, 0
@@ -469,7 +472,7 @@ describe('The Oom.Dd class', function () {
         eq( stat.inst_tally, 1
           , 'stat.inst_tally is 1 after an instantiation' )
     }catch(e){console.error(e.message);throw e}})
-
+*/
 
     //@TODO more custom static tests
 
@@ -619,6 +622,7 @@ describe('An Oom.Dd instance', function () {
 
 
     //// Oom.Dd instance: Custom constant attributes.
+/*
     it('has constant attribute `INST_INDEX`', function(){try{
         Class.reset() // so that `stat._inst_tally = 0` @TODO hardReset()
         const instance0 = new Class()
@@ -634,7 +638,7 @@ describe('An Oom.Dd instance', function () {
         neq( instance0.attr.UUID, instance1.attr.UUID
           , 'Two instances have different UUIDs' )
     }catch(e){console.error(e.message);throw e}})
-
+*/
 
 
 

@@ -892,6 +892,419 @@ function generateRandomColors() {
   });
   return out;
 }
+!function(ROOT) {
+  'use strict';
+  if (false)
+    return;
+  var $__2 = ROOT.testify(),
+      describe = $__2.describe,
+      it = $__2.it,
+      eq = $__2.eq,
+      neq = $__2.neq,
+      is = $__2.is,
+      goodVals = $__2.goodVals,
+      badVals = $__2.badVals;
+  var $__3 = Oom.KIT,
+      isConstant = $__3.isConstant,
+      isReadOnly = $__3.isReadOnly,
+      isReadWrite = $__3.isReadWrite;
+  describe('Oom.Dd.Cloud (browser)', function() {
+    var hid = true,
+        Class = ROOT.Oom.Dd.Cloud,
+        stat = Class.stat,
+        schema = Class.schema,
+        instance = new Class(),
+        attr = instance.attr;
+    describe('The Oom.Dd.Cloud.devMainVue() component', function(done) {
+      var testID = 'test-oom-dd-cloud-devmainvue',
+          vueComponent = Vue.component(testID, Class.devMainVue(instance)),
+          $container = $('.container').append(("<div class=\"row " + (hid ? 'hid' : '') + "\" ") + ("id=\"" + testID + "\"><" + testID + ">Loading...</" + testID + "></div>")),
+          vue = new Vue({
+            el: '#' + testID,
+            mounted: testAfterMounted
+          });
+      function testAfterMounted() {
+        it('is a viable Vue component', function() {
+          try {
+            eq($('#' + testID).length, 1, '#' + testID + ' exists');
+            eq($('#' + testID + ' .dev-main').length, 1, 'dev-main exists');
+            eq($('#' + testID + ' .dev-main .member-table').length, 2, 'Two member-tables exist (one for stat, one for attr)');
+          } catch (e) {
+            console.error(e.message);
+            throw e;
+          }
+        });
+        it('shows correct initial statics', function(done) {
+          Vue.nextTick((function() {
+            var error;
+            try {
+              for (var key in stat) {
+                var $el = $(("#" + testID + " .stat .Oom-" + key + " .val"));
+                var val = ($el.find('.read-write')[0]) ? $el.find('.read-write').val() : $el.text();
+                eq(val, stat[key] + '', ("Vue should set .Oom-" + key + " to stat." + key));
+              }
+            } catch (e) {
+              error = e;
+              console.error(e.message);
+            }
+            done(error);
+          }).bind(this));
+        });
+        it('shows that read-only statics have changed', function(done) {
+          var cache = {good: {}};
+          for (var key in stat) {
+            if (!isReadOnly(key))
+              continue;
+            var def = schema.stat[key];
+            cache.good[key] = goodVals[def.typeStr];
+            var shadowObj = def.perClass ? stat : def.definedIn.stat;
+            shadowObj['_' + key] = cache.good[key];
+          }
+          Vue.nextTick((function() {
+            var error;
+            try {
+              for (var key in stat) {
+                if (!isReadOnly(key))
+                  continue;
+                var good = cache.good[key] + '';
+                eq($(("#" + testID + " .stat .Oom-" + key + " .val")).text(), good, '`#' + testID + ' .stat .Oom-' + key + ' .val` changed to ' + good);
+              }
+              Class.reset();
+            } catch (e) {
+              error = e;
+              console.error(e.message);
+            }
+            done(error);
+          }).bind(this));
+        });
+        it('shows that read-write statics have changed', function(done) {
+          var cache = {good: {}};
+          for (var key in stat) {
+            if (!isReadWrite(key))
+              continue;
+            cache.good[key] = goodVals[schema.stat[key].typeStr];
+            stat[key] = cache.good[key];
+          }
+          Vue.nextTick((function() {
+            var error;
+            try {
+              for (var key in stat) {
+                if (!isReadWrite(key))
+                  continue;
+                var good = cache.good[key] + '';
+                eq($(("#" + testID + " .stat .Oom-" + key + " .val .read-write")).val(), good, '`#' + testID + ' .stat .Oom-' + key + ' .val` changed to ' + good);
+              }
+              Class.reset();
+            } catch (e) {
+              error = e;
+              console.error(e.message);
+            }
+            done(error);
+          }).bind(this));
+        });
+        it('updates read-write statics after UI input', function(done) {
+          var cache = {
+            $el: {},
+            good: {}
+          };
+          for (var key in stat) {
+            if (!isReadWrite(key))
+              continue;
+            cache.$el[key] = $(("#" + testID + " .stat .Oom-" + key + " .val .read-write"));
+            cache.good[key] = goodVals[schema.stat[key].typeStr];
+            simulateInput(cache.$el[key], cache.good[key]);
+          }
+          Vue.nextTick((function() {
+            var error;
+            try {
+              for (var key in stat) {
+                if (!isReadWrite(key))
+                  continue;
+                eq(cache.$el[key].val(), cache.good[key] + '', "<INPUT> change should make Vue update stat." + key);
+              }
+              Class.reset();
+            } catch (e) {
+              error = e;
+              console.error(e.message);
+            }
+            done(error);
+          }).bind(this));
+        });
+        it('does not update read-write statics after invalid UI input', function(done) {
+          var cache = {
+            $el: {},
+            orig: {}
+          };
+          for (var key in stat) {
+            if (!isReadWrite(key))
+              continue;
+            cache.$el[key] = $(("#" + testID + " .stat .Oom-" + key + " .val .read-write"));
+            cache.orig[key] = cache.$el[key].val();
+            simulateInput(cache.$el[key], badVals[schema.stat[key].typeStr]);
+          }
+          Vue.nextTick((function() {
+            var error;
+            try {
+              for (var key in stat) {
+                if (!isReadWrite(key))
+                  continue;
+                eq(cache.$el[key].val(), cache.orig[key], "invalid <INPUT> change does not update stat." + key);
+              }
+            } catch (e) {
+              error = e;
+              console.error(e.message);
+            }
+            done(error);
+          }).bind(this));
+        });
+        it('shows correct initial attributes', function(done) {
+          Vue.nextTick((function() {
+            var error;
+            try {
+              for (var key in attr) {
+                var $el = $(("#" + testID + " .attr .Oom-" + key + " .val"));
+                var val = ($el.find('.read-write')[0]) ? $el.find('.read-write').val() : $el.text();
+                eq(val, attr[key] + '', ("Vue should set .Oom-" + key + " to attr." + key));
+              }
+            } catch (e) {
+              error = e;
+              console.error(e.message);
+            }
+            done(error);
+          }).bind(this));
+        });
+        it('shows that read-only attributes have changed', function(done) {
+          var cache = {good: {}};
+          for (var key in attr) {
+            if (!isReadOnly(key))
+              continue;
+            cache.good[key] = goodVals[schema.attr[key].typeStr];
+            attr['_' + key] = cache.good[key];
+          }
+          Vue.nextTick((function() {
+            var error;
+            try {
+              for (var key in attr) {
+                if (!isReadOnly(key))
+                  continue;
+                var good = cache.good[key] + '';
+                eq($(("#" + testID + " .attr .Oom-" + key + " .val")).text(), good, '`#' + testID + ' .attr .Oom-' + key + ' .val` changed to ' + good);
+              }
+              instance.reset();
+            } catch (e) {
+              error = e;
+              console.error(e.message);
+            }
+            done(error);
+          }).bind(this));
+        });
+        it('shows that read-write attributes have changed', function(done) {
+          var cache = {good: {}};
+          for (var key in attr) {
+            if (!isReadWrite(key))
+              continue;
+            cache.good[key] = goodVals[schema.attr[key].typeStr];
+            attr[key] = cache.good[key];
+          }
+          Vue.nextTick((function() {
+            var error;
+            try {
+              for (var key in attr) {
+                if (!isReadWrite(key))
+                  continue;
+                var good = cache.good[key] + '';
+                eq($(("#" + testID + " .attr .Oom-" + key + " .val .read-write")).val(), good, '`#' + testID + ' .attr .Oom-' + key + ' .val` changed to ' + good);
+              }
+              instance.reset();
+            } catch (e) {
+              error = e;
+              console.error(e.message);
+            }
+            done(error);
+          }).bind(this));
+        });
+        it('updates read-write attributes after UI input', function(done) {
+          var cache = {
+            $el: {},
+            good: {}
+          };
+          for (var key in attr) {
+            if (!isReadWrite(key))
+              continue;
+            cache.$el[key] = $(("#" + testID + " .attr .Oom-" + key + " .val .read-write"));
+            cache.good[key] = goodVals[schema.attr[key].typeStr];
+            simulateInput(cache.$el[key], cache.good[key]);
+          }
+          Vue.nextTick((function() {
+            var error;
+            try {
+              for (var key in attr) {
+                if (!isReadWrite(key))
+                  continue;
+                eq(cache.$el[key].val(), cache.good[key] + '', "<INPUT> change should make Vue update attr." + key);
+              }
+              instance.reset();
+            } catch (e) {
+              error = e;
+              console.error(e.message);
+            }
+            done(error);
+          }).bind(this));
+        });
+        it('does not update read-write attributes after invalid UI input', function(done) {
+          var cache = {
+            $el: {},
+            orig: {}
+          };
+          for (var key in attr) {
+            if (!isReadWrite(key))
+              continue;
+            cache.$el[key] = $(("#" + testID + " .attr .Oom-" + key + " .val .read-write"));
+            cache.orig[key] = cache.$el[key].val();
+            simulateInput(cache.$el[key], badVals[schema.attr[key].typeStr]);
+          }
+          Vue.nextTick((function() {
+            var error;
+            try {
+              for (var key in attr) {
+                if (!isReadWrite(key))
+                  continue;
+                eq(cache.$el[key].val(), cache.orig[key], "invalid <INPUT> change does not update attr." + key);
+              }
+            } catch (e) {
+              error = e;
+              console.error(e.message);
+            }
+            done(error);
+          }).bind(this));
+        });
+      }
+    });
+    describe('The Oom.Dd.Cloud.devThumbAFrame*() set', function(done) {
+      it('devThumbAFrame*() functions return expected objects', function() {
+        try {} catch (e) {
+          console.error(e.message);
+          throw e;
+        }
+      });
+      var pfx = 'oom-dd-cloud',
+          testID = ("test-" + pfx + "-devthumb"),
+          vueComponent = Vue.component(testID, Class.devThumbAFrameVue(instance)),
+          aframeComponent = AFRAME.registerComponent((pfx + "-devthumb"), Class.devThumbAFrame(instance)),
+          aframePrimative = AFRAME.registerPrimitive(("a-" + pfx + "-devthumb"), Class.devThumbAFramePrimative(instance, (pfx + "-devthumb"))),
+          $container = $('a-scene').append(("<a-entity id=\"" + testID + "\">") + ("<" + testID + "></" + testID + "></a-entity>")),
+          vue = new Vue({
+            el: '#' + testID,
+            mounted: testAfterMounted
+          });
+      function testAfterMounted() {
+        it('devThumbAframeVue() creates a viable Vue component', function() {
+          try {
+            eq($('#' + testID).length, 1, '#' + testID + ' exists');
+            eq($(("#" + testID + " a-" + pfx + "-devthumb")).length, 2, ("Two <a-" + pfx + "-devthumb>s exist in #" + testID));
+          } catch (e) {
+            console.error(e.message);
+            throw e;
+          }
+        });
+        it('on the inside, is a viable A-Frame component', function() {
+          try {} catch (e) {
+            console.error(e.message);
+            throw e;
+          }
+        });
+        it('changing `stat/attr.hilite` changes box color', function(done) {
+          var $__4 = generateRandomColors(),
+              firstObj = $__4.firstObj,
+              firstHex = $__4.firstHex,
+              secondObj = $__4.secondObj,
+              secondHex = $__4.secondHex;
+          stat.hilite = firstHex;
+          attr.hilite = secondHex;
+          Vue.nextTick(function() {
+            Vue.nextTick((function() {
+              var error;
+              try {
+                $(("#" + testID + " >a-entity")).attr('position', '0 0 0');
+                var r = testPixels({
+                  tol: 1,
+                  pos: [{
+                    x: 0,
+                    y: 0.5
+                  }, {
+                    x: 1,
+                    y: 0.5
+                  }],
+                  exp: [firstObj, secondObj]
+                });
+                eq(r[0].passes, 4, ("mid-left pixel " + r[0].actualRGBA + " is near-") + ("enough expected hilite static " + r[0].expRGBA));
+                eq(r[1].passes, 4, ("mid-right pixel " + r[1].actualRGBA + " is near-") + ("enough expected hilite attribute " + r[1].expRGBA));
+                $(("#" + testID + " >a-entity")).attr('position', '0 10 0');
+              } catch (e) {
+                error = e;
+                console.error(e.message);
+              }
+              done(error);
+            }).bind(this));
+          });
+        });
+        it('boxes can change `stat/attr.hilite` on click', function(done) {
+          var $__4 = generateRandomColors(),
+              thirdObj = $__4.thirdObj,
+              thirdHex = $__4.thirdHex,
+              fourthObj = $__4.fourthObj,
+              fourthHex = $__4.fourthHex;
+          var onOomEvent = function(evt) {
+            if (!evt.detail)
+              return;
+            var $__5 = evt.detail,
+                el = $__5.el,
+                type = $__5.type;
+            if ('click' !== type)
+              return;
+            if ($(el).hasClass('stat'))
+              stat.hilite = thirdHex;
+            if ($(el).hasClass('attr'))
+              attr.hilite = fourthHex;
+          };
+          $(window).on('oom-event', onOomEvent);
+          var evt = new MouseEvent('click');
+          $(("#" + testID + " a-" + pfx + "-devthumb.stat"))[0].dispatchEvent(evt);
+          $(("#" + testID + " a-" + pfx + "-devthumb.attr"))[0].dispatchEvent(evt);
+          $(window).off('oom-event', onOomEvent);
+          Vue.nextTick(function() {
+            Vue.nextTick((function() {
+              var error;
+              try {
+                $(("#" + testID + " >a-entity")).attr('position', '0 0 0');
+                var r = testPixels({
+                  tol: 1,
+                  pos: [{
+                    x: 0,
+                    y: 0.5
+                  }, {
+                    x: 1,
+                    y: 0.5
+                  }],
+                  exp: [thirdObj, fourthObj]
+                });
+                eq(r[0].passes, 4, ("mid-left pixel " + r[0].actualRGBA + " is near-") + ("enough expected hilite static " + r[0].expRGBA));
+                eq(r[1].passes, 4, ("mid-right pixel " + r[1].actualRGBA + " is near-") + ("enough expected hilite attribute " + r[1].expRGBA));
+                eq(stat.hilite, thirdHex, '`stat.hilite` is now ' + thirdHex);
+                eq(attr.hilite, fourthHex, '`attr.hilite` is now ' + fourthHex);
+                $(("#" + testID + " >a-entity")).attr('position', '0 10 0');
+              } catch (e) {
+                error = e;
+                console.error(e.message);
+              }
+              done(error);
+            }).bind(this));
+          });
+        });
+      }
+    });
+  });
+}(window);
 
 
 

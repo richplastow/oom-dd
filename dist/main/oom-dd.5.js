@@ -101,29 +101,11 @@
           type: 'color'
         }
       },
-      attr: {
-        UUID: {
-          remarks: 'Every Oom instance gets a universally unique ID',
-          default: KIT.generateUUID,
-          type: 'string'
-        },
-        INST_INDEX: {
-          remarks: 'Every Oom instance gets an instance index, which ' + 'equals its class’s `inst_tally` at the moment of ' + 'instantiation. As a side effect of recording ' + '`INST_INDEX`, `inst_tally` is incremented',
-          default: function(instance) {
-            return (++instance.constructor.stat._inst_tally) - 1;
-          },
-          type: 'nnint'
-        },
-        hilite: {
+      attr: {hilite: {
           remarks: 'General purpose, useful as a dev label or status',
           default: '#445566',
           type: 'color'
-        },
-        fooBar: {
-          default: 1000,
-          type: Number
-        }
-      }
+        }}
     });
   }
   Object.defineProperty(Oom, 'memberTableVueTemplate', {get: function(innerHTML) {
@@ -501,6 +483,37 @@
       }
     }, previousKIT);
   }
+}('object' === (typeof global === 'undefined' ? 'undefined' : $traceurRuntime.typeof(global)) ? global : this);
+!function(ROOT) {
+  'use strict';
+  var Oom = ROOT.Oom;
+  var KIT = Oom.KIT;
+  var Class = Oom.Dd.Cloud = function($__super) {
+    function $__0() {
+      var config = arguments[0] !== (void 0) ? arguments[0] : {};
+      $traceurRuntime.superConstructor($__0).call(this, config);
+    }
+    return ($traceurRuntime.createClass)($__0, {}, {}, $__super);
+  }(Oom.Dd);
+  KIT.name(Class, 'Oom.Dd.Cloud');
+  Oom.Dd.Cloud.mixin({
+    title: 'The Oom.Dd.Cloud Schema',
+    remarks: 'Defines metadata for this module',
+    location: 'src/main/Cloud.6.js',
+    config: {},
+    stat: {
+      NAME: 'Oom.Dd.Cloud',
+      REMARKS: 'A single cloud, floating in the DD sky'
+    },
+    attr: {
+      positionX: 0,
+      positionY: 0,
+      positionZ: 0,
+      rotationX: 0,
+      rotationY: 0,
+      rotationZ: 0
+    }
+  });
 }('object' === (typeof global === 'undefined' ? 'undefined' : $traceurRuntime.typeof(global)) ? global : this);
 
 
