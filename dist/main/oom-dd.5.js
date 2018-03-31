@@ -1,11 +1,11 @@
-//// Oom.Dd //// 1.0.0 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.1 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 "use strict";
 !function(ROOT) {
   'use strict';
   var META = {
     NAME: 'Oom.Dd',
-    VERSION: '1.0.0',
+    VERSION: '1.0.1',
     HOMEPAGE: 'http://oom-dd.richplastow.com/',
     REMARKS: 'A VR website for Developing Dreams',
     LOADED_FIRST: !ROOT.Oom
@@ -480,6 +480,38 @@
             type: 'color',
             default: '#ff00ff'
           }};
+      },
+      oomSchemaToAFrameSchema2: function(oomSchema) {
+        return {
+          hilite: {
+            type: 'color',
+            default: '#ff00ff'
+          },
+          positionX: {
+            type: 'number',
+            default: 0
+          },
+          positionY: {
+            type: 'number',
+            default: 0
+          },
+          positionZ: {
+            type: 'number',
+            default: 0
+          },
+          rotationX: {
+            type: 'number',
+            default: 0
+          },
+          rotationY: {
+            type: 'number',
+            default: 0
+          },
+          rotationZ: {
+            type: 'number',
+            default: 0
+          }
+        };
       }
     }, previousKIT);
   }
@@ -503,12 +535,18 @@
     config: {},
     stat: {
       NAME: 'Oom.Dd.Cloud',
-      REMARKS: 'A single cloud, floating in the DD sky'
+      REMARKS: 'A single cloud, floating in the DD sky',
+      positionX: -0.7,
+      positionY: 1.5,
+      positionZ: -1.5,
+      rotationX: 0,
+      rotationY: 0,
+      rotationZ: 0
     },
     attr: {
-      positionX: 0,
-      positionY: 0,
-      positionZ: 0,
+      positionX: 0.7,
+      positionY: 1.5,
+      positionZ: -1.5,
       rotationX: 0,
       rotationY: 0,
       rotationZ: 0

@@ -1,4 +1,4 @@
-//// Oom.Dd //// 1.0.0 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.1 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 "use strict";
 !function(ROOT) {
@@ -909,7 +909,7 @@ function generateRandomColors() {
       isReadOnly = $__3.isReadOnly,
       isReadWrite = $__3.isReadWrite;
   describe('Oom.Dd.Cloud (browser)', function() {
-    var hid = true,
+    var hid = 0,
         Class = ROOT.Oom.Dd.Cloud,
         stat = Class.stat,
         schema = Class.schema,
@@ -1292,7 +1292,6 @@ function generateRandomColors() {
                 eq(r[1].passes, 4, ("mid-right pixel " + r[1].actualRGBA + " is near-") + ("enough expected hilite attribute " + r[1].expRGBA));
                 eq(stat.hilite, thirdHex, '`stat.hilite` is now ' + thirdHex);
                 eq(attr.hilite, fourthHex, '`attr.hilite` is now ' + fourthHex);
-                $(("#" + testID + " >a-entity")).attr('position', '0 10 0');
               } catch (e) {
                 error = e;
                 console.error(e.message);

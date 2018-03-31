@@ -1,11 +1,11 @@
-//// Oom.Dd //// 1.0.0 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.1 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 !function (ROOT) { 'use strict'
 
 //// Metadata for Oom.Dd
 const META = {
     NAME:     'Oom.Dd'
-  , VERSION:  '1.0.0' // OOMBUMPABLE
+  , VERSION:  '1.0.1' // OOMBUMPABLE
   , HOMEPAGE: 'http://oom-dd.richplastow.com/'
   , REMARKS:  'A VR website for Developing Dreams'
   , LOADED_FIRST: ! ROOT.Oom // true if the Oom class is defined by this module
@@ -806,6 +806,17 @@ function assignKIT (previousKIT={}) { return Object.assign({}, {
   , oomSchemaToAFrameSchema: oomSchema => {
         return {
             hilite: { type:'color', default:'#ff00ff' }
+        }
+    }
+  , oomSchemaToAFrameSchema2: oomSchema => {
+        return {
+            hilite: { type:'color', default:'#ff00ff' }
+          , positionX: { type:'number', default:0 }
+          , positionY: { type:'number', default:0 }
+          , positionZ: { type:'number', default:0 }
+          , rotationX: { type:'number', default:0 }
+          , rotationY: { type:'number', default:0 }
+          , rotationZ: { type:'number', default:0 }
         }
     }
 

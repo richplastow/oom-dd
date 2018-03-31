@@ -2,14 +2,14 @@
 
 
 
-//// Oom.Dd //// 1.0.0 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.1 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 !function (ROOT) { 'use strict'
 
 //// Metadata for Oom.Dd
 const META = {
     NAME:     'Oom.Dd'
-  , VERSION:  '1.0.0' // OOMBUMPABLE
+  , VERSION:  '1.0.1' // OOMBUMPABLE
   , HOMEPAGE: 'http://oom-dd.richplastow.com/'
   , REMARKS:  'A VR website for Developing Dreams'
   , LOADED_FIRST: ! ROOT.Oom // true if the Oom class is defined by this module
@@ -812,6 +812,17 @@ function assignKIT (previousKIT={}) { return Object.assign({}, {
             hilite: { type:'color', default:'#ff00ff' }
         }
     }
+  , oomSchemaToAFrameSchema2: oomSchema => {
+        return {
+            hilite: { type:'color', default:'#ff00ff' }
+          , positionX: { type:'number', default:0 }
+          , positionY: { type:'number', default:0 }
+          , positionZ: { type:'number', default:0 }
+          , rotationX: { type:'number', default:0 }
+          , rotationY: { type:'number', default:0 }
+          , rotationZ: { type:'number', default:0 }
+        }
+    }
 
 }, previousKIT) }//assignKIT()
 
@@ -825,7 +836,7 @@ function assignKIT (previousKIT={}) { return Object.assign({}, {
 
 
 
-//// Oom.Dd //// 1.0.0 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.1 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 !function (ROOT) { 'use strict'
 
@@ -999,6 +1010,12 @@ Oom.Dd.Cloud.mixin({
         //// Public constant statics.
         NAME:    'Oom.Dd.Cloud'
       , REMARKS: 'A single cloud, floating in the DD sky'
+      , positionX: -0.7
+      , positionY: 1.5
+      , positionZ: -1.5
+      , rotationX: 0
+      , rotationY: 0
+      , rotationZ: 0
 /*
       // , propA: Number // or set to `null` to accept any type
       // , propB: [ String, Number ] // multiple possible types
@@ -1010,9 +1027,9 @@ Oom.Dd.Cloud.mixin({
 */
     //// Public instance properties (known as ‘attributes’ in Oom).
     }, attr: {
-        positionX: 0
-      , positionY: 0
-      , positionZ: 0
+        positionX: 0.7
+      , positionY: 1.5
+      , positionZ: -1.5
       , rotationX: 0
       , rotationY: 0
       , rotationZ: 0
@@ -1029,18 +1046,115 @@ Oom.Dd.Cloud.mixin({
 */
     }
 
-})//Oom.Foo.mixin()
+})//Oom.Dd.Cloud.mixin()
 
-// //// Create the plain `Class.stat` object (which Vue watches) and add public
-// //// statics to it. Arg 2 of `KIT.define()` is `true` for statics.
-// Oom.Dd.Cloud.stat = {}
-// KIT.define(Oom.Dd.Cloud.stat, true, Oom.Dd.Cloud.schema.stat)
-//
-// //// Create the plain `inst.attr` object (which Vue watches) and add public
-// //// attributes to it. Arg 2 of `KIT.define()` is `false` for attributes.
-// Oom.Dd.Cloud.prototype.attr = {}
-// KIT.define(Oom.Dd.Cloud.prototype.attr, false, Oom.Dd.Cloud.schema.attr)
-//
+
+/*
+////
+Oom.Dd.Cloud.devThumbAFrameVueTemplate = function (instance, innerHTML) {
+    const pfx = instance.constructor.name.toLowerCase().replace(/\./g, '-')
+    return innerHTML = `
+<a-entity position="0 0 0">
+  <a-${pfx}-devthumb oom-event class="stat"
+            :positionx="stat.positionX" :positiony="stat.positionY" :positionz="stat.positionZ"
+            :rotationx="stat.rotationX" :rotationy="stat.rotationY" :rotationz="stat.rotationZ"
+            :hilite="stat.hilite">
+  </a-${pfx}-devthumb>
+  <a-${pfx}-devthumb oom-event class="attr"
+            :positionx="attr.positionX" :positiony="attr.positionY" :positionz="attr.positionZ"
+            :rotationx="attr.rotationX" :rotationy="attr.rotationY" :rotationz="attr.rotationZ"
+            :hilite="attr.hilite">
+  </a-${pfx}-devthumb>
+</a-entity>
+`}//Oom.Dd.Cloud.devThumbAFrameVueTemplate()
+
+
+Oom.Dd.Cloud.devThumbAFrameVue = function (instance) { return {
+    template: Oom.Dd.Cloud.devThumbAFrameVueTemplate(instance)
+  , data: function () {
+        const Class = instance.constructor
+        return {
+            schema: Class.schema
+          , stat: Class.stat
+          , attr: instance.attr
+        }
+    }
+
+} }//Oom.Dd.Cloud.devThumbAFrameVue()
+
+
+
+//// Returns on object used for registering an A-Frame component version of Oom.Dd.Cloud.
+Oom.Dd.Cloud.devThumbAFrame = function (instanceXXX) { return {
+    schema: KIT.oomSchemaToAFrameSchema2(ROOT.Oom.Dd.Cloud.schema)
+  , init: function () {
+        this.el.setAttribute('material', 'shader:flat; color:pink')
+        this.el.setAttribute('position', '0,0,0')
+        this.el.setAttribute('rotation', '0,0,0')
+    }
+  , update: function (oldData) {
+        for (let key in AFRAME.utils.diff(oldData, this.data) )
+            if (oldData[key] !== this.data[key]) // did change
+                this.updateAttribute(key)
+    }
+  , tick: function () { }
+  , remove: function () {}
+  , pause: function () {}
+  , play: function () {}
+
+  , updateAttribute: function (key) {
+        const attributes = {
+            hilite:    v => this.el.setAttribute('material', { color:v })
+          , positionX: v => this.el.setAttribute('position', { x:v })
+          , positionY: v => this.el.setAttribute('position', { y:v })
+          , positionZ: v => this.el.setAttribute('position', { z:v })
+          , rotationX: v => this.el.setAttribute('rotation', { x:v })
+          , rotationY: v => this.el.setAttribute('rotation', { y:v })
+          , rotationZ: v => this.el.setAttribute('rotation', { z:v })
+        }
+        if (! attributes[key])
+            return console.warn(`${key} not recognised`)
+        attributes[key](this.data[key])
+        // console.log(key, this.data[key])
+    }
+
+} }//Oom.Dd.Cloud.devThumbAFrame()
+
+
+
+
+////
+//// See https://github.com/aframevr/aframe/blob/master/docs/introduction/html-and-primitives.md#registering-a-primitive
+Oom.Dd.Cloud.devThumbAFramePrimative = function (instance, aframeComponentName) {
+    return AFRAME.utils.extendDeep(
+        {} // return a fresh object
+      , AFRAME.primitives.getMeshMixin() // for creating mesh-based primitives
+      , {
+            defaultComponents: { // preset default components
+                [aframeComponentName]: {
+                    hilite: '#ff0000'
+                  , positionX: 0
+                  , positionY: 0
+                  , positionZ: 0
+                  , rotationX: 0
+                  , rotationY: 0
+                  , rotationZ: 0
+                }
+              , geometry: { primitive: 'sphere' }
+            }
+          , mappings: { // from HTML attributes to component properties
+                hilite:    aframeComponentName+'.hilite'
+              , positionx: aframeComponentName+'.positionX'
+              , positiony: aframeComponentName+'.positionY'
+              , positionz: aframeComponentName+'.positionZ'
+              , rotationx: aframeComponentName+'.rotationX'
+              , rotationy: aframeComponentName+'.rotationY'
+              , rotationz: aframeComponentName+'.rotationZ'
+            }
+        }
+    )//extendDeep()
+}//Oom.devThumbAFramePrimative()
+*/
 
 
 

@@ -25,7 +25,7 @@ $oomClasses['Oom.Dd'] = new class {
     },
     "VERSION": {
       "name": "VERSION",
-      "default": "1.0.0",
+      "default": "1.0.1",
       "isFn": false,
       "type": "@TODO",
       "typeStr": "String",
@@ -132,7 +132,7 @@ $oomClasses['Oom.Dd.Cloud'] = new class {
     },
     "VERSION": {
       "name": "VERSION",
-      "default": "1.0.0",
+      "default": "1.0.1",
       "isFn": false,
       "type": "@TODO",
       "typeStr": "String",
@@ -195,6 +195,72 @@ $oomClasses['Oom.Dd.Cloud'] = new class {
       "definedInStr": "Oom.Dd",
       "perClass": true,
       "remarks": "A Boolean"
+    },
+    "positionX": {
+      "name": "positionX",
+      "default": -0.7,
+      "isFn": false,
+      "type": "@TODO",
+      "typeStr": "Number",
+      "definedIn": "@TODO",
+      "definedInStr": "Oom.Dd.Cloud",
+      "perClass": true,
+      "remarks": "A Number"
+    },
+    "positionY": {
+      "name": "positionY",
+      "default": 1.5,
+      "isFn": false,
+      "type": "@TODO",
+      "typeStr": "Number",
+      "definedIn": "@TODO",
+      "definedInStr": "Oom.Dd.Cloud",
+      "perClass": true,
+      "remarks": "A Number"
+    },
+    "positionZ": {
+      "name": "positionZ",
+      "default": -1.5,
+      "isFn": false,
+      "type": "@TODO",
+      "typeStr": "Number",
+      "definedIn": "@TODO",
+      "definedInStr": "Oom.Dd.Cloud",
+      "perClass": true,
+      "remarks": "A Number"
+    },
+    "rotationX": {
+      "name": "rotationX",
+      "default": 0,
+      "isFn": false,
+      "type": "@TODO",
+      "typeStr": "Number",
+      "definedIn": "@TODO",
+      "definedInStr": "Oom.Dd.Cloud",
+      "perClass": true,
+      "remarks": "A Number"
+    },
+    "rotationY": {
+      "name": "rotationY",
+      "default": 0,
+      "isFn": false,
+      "type": "@TODO",
+      "typeStr": "Number",
+      "definedIn": "@TODO",
+      "definedInStr": "Oom.Dd.Cloud",
+      "perClass": true,
+      "remarks": "A Number"
+    },
+    "rotationZ": {
+      "name": "rotationZ",
+      "default": 0,
+      "isFn": false,
+      "type": "@TODO",
+      "typeStr": "Number",
+      "definedIn": "@TODO",
+      "definedInStr": "Oom.Dd.Cloud",
+      "perClass": true,
+      "remarks": "A Number"
     }
   },
   "attr": {
@@ -211,7 +277,7 @@ $oomClasses['Oom.Dd.Cloud'] = new class {
     },
     "positionX": {
       "name": "positionX",
-      "default": 0,
+      "default": 0.7,
       "isFn": false,
       "type": "@TODO",
       "typeStr": "Number",
@@ -222,7 +288,7 @@ $oomClasses['Oom.Dd.Cloud'] = new class {
     },
     "positionY": {
       "name": "positionY",
-      "default": 0,
+      "default": 1.5,
       "isFn": false,
       "type": "@TODO",
       "typeStr": "Number",
@@ -233,7 +299,7 @@ $oomClasses['Oom.Dd.Cloud'] = new class {
     },
     "positionZ": {
       "name": "positionZ",
-      "default": 0,
+      "default": -1.5,
       "isFn": false,
       "type": "@TODO",
       "typeStr": "Number",

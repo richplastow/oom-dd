@@ -1,4 +1,4 @@
-//// Oom.Dd //// 1.0.0 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.1 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 !function (ROOT) { 'use strict'
 if (false) return // change to `true` to ‘hard skip’ this test
@@ -6,7 +6,7 @@ const { describe, it, eq, neq, is, goodVals, badVals } = ROOT.testify()
 const { isConstant, isReadOnly, isReadWrite } = Oom.KIT
 describe('Oom.Dd.Cloud (browser)', () => {
     const
-        hid = true // `true` hides the components, `false` makes them visible
+        hid = 0 // `true` hides the components, `false` makes them visible
       , Class = ROOT.Oom.Dd.Cloud
       , stat = Class.stat
       , schema = Class.schema
@@ -390,7 +390,7 @@ describe('The Oom.Dd.Cloud.devThumbAFrame*() set', function (done) {
               , '`stat.hilite` is now '+thirdHex )
             eq( attr.hilite, fourthHex
               , '`attr.hilite` is now '+fourthHex )
-            $(`#${testID} >a-entity`).attr('position', '0 10 0')
+            // $(`#${testID} >a-entity`).attr('position', '0 10 0')
         }catch(e){error=e;console.error(e.message)}done(error)}).bind(this))
         })
     }) // `bind(this)` to run the test in Mocha’s context)
