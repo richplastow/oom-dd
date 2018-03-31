@@ -47,7 +47,7 @@ $oomClasses['Oom.Dd'] = new class {
     },
     "REMARKS": {
       "name": "REMARKS",
-      "default": "A VR website for Developing Dreams",
+      "default": "The Developing Dreams VR Website",
       "isFn": false,
       "type": "@TODO",
       "typeStr": "String",

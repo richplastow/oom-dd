@@ -7,7 +7,7 @@
     NAME: 'Oom.Dd',
     VERSION: '1.0.2',
     HOMEPAGE: 'http://oom-dd.richplastow.com/',
-    REMARKS: 'A VR website for Developing Dreams',
+    REMARKS: 'The Developing Dreams VR Website',
     LOADED_FIRST: !ROOT.Oom
   };
   var KIT = assignKIT(META.LOADED_FIRST || !ROOT.Oom.KIT ? {} : ROOT.Oom.KIT);

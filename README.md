@@ -1,9 +1,9 @@
 # Oom.Dd
 
-#### A VR website for Developing Dreams
+#### The Developing Dreams VR Website
 
 + __Last update:__  2018/03/31 <!-- OOMBUMPABLE -->
-+ __Version:__      1.0.2 <!-- OOMBUMPABLE -->
++ __Version:__      1.0.3 <!-- OOMBUMPABLE -->
 
 [Homepage](http://oom-dd.richplastow.com/) &nbsp;
 [Repo](https://github.com/richplastow/oom-dd) &nbsp;

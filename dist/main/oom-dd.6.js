@@ -11,7 +11,7 @@ const META = {
     NAME:     'Oom.Dd'
   , VERSION:  '1.0.2' // OOMBUMPABLE
   , HOMEPAGE: 'http://oom-dd.richplastow.com/'
-  , REMARKS:  'A VR website for Developing Dreams'
+  , REMARKS:  'The Developing Dreams VR Website'
   , LOADED_FIRST: ! ROOT.Oom // true if the Oom class is defined by this module
 }
 

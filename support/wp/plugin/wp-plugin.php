@@ -5,12 +5,12 @@
 /*
 Plugin Name: Oom.Dd
 Plugin URI: https://github.com/richplastow/oom-dd/tree/master/wp/
-Description: A VR website for Developing Dreams
+Description: The Developing Dreams VR Website
 Author: Rich Plastow for Developing Dreams
 Author URI: https://richplastow.com/
 License: MIT
 Text Domain: oom-dd
-Version: 1.0.2
+Version: 1.0.3
 */
 
 
