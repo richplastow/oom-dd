@@ -1,0 +1,130 @@
+
+
+/* FONTS */
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+pre, tt, code, kbd, samp, var {
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+
+
+
+/* COLOURS */
+
+body {
+    background: ${{color}};
+}
+.container {
+    background: #fff;
+}
+
+
+
+
+/* LAYOUT */
+
+.container {
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    border-radius: 0 0 4px 4px;
+}
+
+
+
+
+/* HOMEPAGE */
+
+#logo {
+    display: block;
+    width: 60%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+/* AFRAME SCENE IN TEST AND DEMO */
+
+a-scene {
+    width: 400px!important;
+    height: 400px!important;
+    margin: 0.5em auto;
+}
+a-scene .a-canvas {
+    background: ${{color}};
+    border-radius: 8px;
+}
+#screenshots canvas {
+    display: inline-block;
+    margin: 1em;
+    background: ${{color}};
+    border-radius: 3px;
+}
+
+
+
+
+/* MEMBER-TABLES IN TEST AND DEMO */
+
+.dev-main,
+.dev-main .member-table {
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    border-radius: 4px;
+    background: rgba(0,64,128,0.1);
+}
+.dev-main >.member-table {
+    font-size: 1em;
+    line-height: 1.15;
+}
+.member-table table {
+    width: 100%;
+    margin-bottom: 0.5em;
+}
+.member-table th {
+    font-size: 0.7em;
+}
+.member-table td {
+    padding: 0.2em 0.5em;
+    font-size: 0.8em;
+    border: 1px solid rgba(0,64,128,0.3);
+    background: rgba(255,255,255,0.3);
+}
+.member-table td:first-child {
+    width: 0;
+}
+.member-table td input {
+    width: 100%;
+}
+.member-table caption {
+    padding: 0 0 0.2em 0;
+    caption-side: top;
+}
+.member-table caption b {
+    display: inline-block;
+    transform: translate(-0.1em, -0.1em);
+}
+.member-table .is-default {
+    text-align: center;
+}
+
+
+
+
+/* UTILITY */
+
+.hid {
+    display: none;
+}
+.nopad {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+.rr {
+    text-align: right;
+}
