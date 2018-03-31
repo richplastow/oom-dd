@@ -3,10 +3,10 @@
 #### A VR website for Developing Dreams
 
 + __Last update:__  2018/03/31 <!-- OOMBUMPABLE -->
-+ __Version:__      1.0.1 <!-- OOMBUMPABLE -->
++ __Version:__      1.0.2 <!-- OOMBUMPABLE -->
 
 [Homepage](http://oom-dd.richplastow.com/) &nbsp;
-[Repo](https://github.com/loopdotcoop/oom-dd) &nbsp;
+[Repo](https://github.com/richplastow/oom-dd) &nbsp;
 [NPM](https://www.npmjs.com/package/oom-dd) &nbsp;
 [Changelog](http://oom-dd.richplastow.com/CHANGELOG) &nbsp;
 [Test](http://oom-dd.richplastow.com/support/test.html) &nbsp;

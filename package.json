@@ -1,6 +1,6 @@
 {
   "name": "oom-dd",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A VR website for Developing Dreams",
   "main": "dist/main/oom-dd.min.5.js",
   "directories": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/loopdotcoop/oom-dd.git"
+    "url": "git+https://github.com/richplastow/oom-dd.git"
   },
   "keywords": [
     "Oom",
@@ -32,7 +32,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/loopdotcoop/oom-dd/issues"
+    "url": "https://github.com/richplastow/oom-dd/issues"
   },
   "homepage": "http://oom-dd.richplastow.com/"
 }

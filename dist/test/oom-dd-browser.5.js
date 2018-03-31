@@ -1,4 +1,4 @@
-//// Oom.Dd //// 1.0.1 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.2 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 "use strict";
 !function(ROOT) {

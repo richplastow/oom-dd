@@ -1,11 +1,11 @@
-//// Oom.Dd //// 1.0.1 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.2 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 !function (ROOT) { 'use strict'
 
 //// Metadata for Oom.Dd
 const META = {
     NAME:     'Oom.Dd'
-  , VERSION:  '1.0.1' // OOMBUMPABLE
+  , VERSION:  '1.0.2' // OOMBUMPABLE
   , HOMEPAGE: 'http://oom-dd.richplastow.com/'
   , REMARKS:  'A VR website for Developing Dreams'
   , LOADED_FIRST: ! ROOT.Oom // true if the Oom class is defined by this module
