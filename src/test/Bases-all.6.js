@@ -1,4 +1,4 @@
-//// Oom.Dd //// 1.0.3 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.4 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 //// Node.js:    7.2.0
 //// Rhino:      @TODO get Rhino working

@@ -2,7 +2,7 @@
 
 
 
-//// Oom.Dd //// 1.0.2 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.4 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 //// Windows XP: Firefox 6, Chrome 15 (and probably lower), Opera 12.10
 //// Windows 7:  IE 9, Safari 5.1
@@ -956,7 +956,7 @@ function generateRandomColors () {
 
 
 
-//// Oom.Dd //// 1.0.2 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.4 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 !function (ROOT) { 'use strict'
 if (false) return // change to `true` to ‘hard skip’ this test

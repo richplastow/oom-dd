@@ -2,7 +2,7 @@
 
 
 
-//// Oom.Dd //// 1.0.2 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.4 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 //// Node.js:    7.2.0
 //// Rhino:      @TODO get Rhino working
@@ -715,7 +715,7 @@ function testify () {
 
 
 
-//// Oom.Dd //// 1.0.2 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.4 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 !function (ROOT) { 'use strict'
 if (false) return // change to `true` to ‘hard skip’ this test

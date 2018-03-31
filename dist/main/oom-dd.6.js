@@ -2,14 +2,14 @@
 
 
 
-//// Oom.Dd //// 1.0.2 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.4 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 !function (ROOT) { 'use strict'
 
 //// Metadata for Oom.Dd
 const META = {
     NAME:     'Oom.Dd'
-  , VERSION:  '1.0.2' // OOMBUMPABLE
+  , VERSION:  '1.0.4' // OOMBUMPABLE
   , HOMEPAGE: 'http://oom-dd.richplastow.com/'
   , REMARKS:  'The Developing Dreams VR Website'
   , LOADED_FIRST: ! ROOT.Oom // true if the Oom class is defined by this module
@@ -836,7 +836,7 @@ function assignKIT (previousKIT={}) { return Object.assign({}, {
 
 
 
-//// Oom.Dd //// 1.0.2 //// March 2018 //// http://oom-dd.richplastow.com/ /////
+//// Oom.Dd //// 1.0.4 //// March 2018 //// http://oom-dd.richplastow.com/ /////
 
 !function (ROOT) { 'use strict'
 
